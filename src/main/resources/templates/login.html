@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Login Page</title>
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+
+a:active {
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+.card
+{
+margin-top:50px;
+
+}
+
+footer {
+    background-color: #3d8bc7;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar {
+	background-color:#3d8bc7;
+	color: white;
+}
+
+.navbar-nav .nav-link {
+	color: white;
+}
+.redirect-links {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.container1{
+	margin: 0px;
+}
+
+.container1 a{
+	margin-left: 10px;
+}
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+		<div class="container1 container" >
+		<img th:src="@{/image/secondry-logo.png}"  height="40px" width="50px"></img>
+			<a th:href="@{/}" class="navbar-brand">IRCTC</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item redirect-links">
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/user/registration}">Registration</a></li>
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/ContactUs}">Contact</a></li>
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header" style="background-color: #3d8bc7">
+					
+					<h3 class="text-center">Login to IRCTC Login</h3>
+					</div>
+					<div class="card-body">
+						<form id="loginForm" th:action="@{/user/login}"
+							th:object="${login}" method="POST">
+							<div class="mb-3">
+
+								<label for="email" class="form-label">Email address</label> <input
+									type="text" class="form-control" id="email"
+									placeholder="Enter your email" th:field="*{email}"
+									th:classappend="${#fields.hasErrors('email')?'is-invalid' : ''}">
+
+								<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+									id="validationServer03Feedback" class="invalid-feedback">
+								</div>
+								<small style="color: #dc3545"></small>
+							</div>
+							<div class="mb-3">
+								<label for="password" class="form-label">Password</label> <input
+									type="password" class="form-control" id="password"
+									placeholder="Enter your password" th:field="*{password}"
+									th:classappend="${#fields.hasErrors('password')?'is-invalid' : ''}">
+
+								<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+									id="validationServer03Feedback" class="invalid-feedback">
+								</div>
+								<small style="color: #dc3545"></small>
+							</div>
+
+							
+							<div th:if="${incorrect}">
+   							<script>alert("Incorrect Credentials!!!")</script>
+							</div>
+						
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary btn-block active">Login</button>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer>
+		<div class="container">
+			<p>© 2024 IRCTC. All rights reserved.</p>
+		</div>
+	</footer>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+		
+	</script>
+	<script th:src="@{/js/loginValidation.js}">
+	
+	</script>
+
+
+</body>
+</html>
